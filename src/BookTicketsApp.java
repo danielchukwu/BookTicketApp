@@ -6,27 +6,35 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BookTicketsApp {
-
+    // Create Queue
     Queue<String> queue = new LinkedList<>();
+    // Ticket Name
     String ticketName = "Burnaboy Madness Concert";
+    // Available tickets
     int availableTickets = 5;
 
     public static void main(String[] args) {
+        // Create instance of class
         BookTicketsApp ticketApp = new BookTicketsApp();
+
+        // Call startApp() method using instance
         ticketApp.startApp();
     }
 
+    // Method - startApp()
     public void startApp() {
         // Create frame for app
-        JFrame frame = new JFrame("Book Tickets");
-        frame.setLayout(new GridLayout(4, 1));
-        frame.setSize(500, 300);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame("Book Tickets");    // create frame
+        frame.setLayout(new GridLayout(4, 1));   // Set Rows and Columns
+        frame.setSize(500, 300);              // Set Size
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);    // Close application
 
-        // Text Field & Button
+        // Create Text Field
         JTextField nameField = new JTextField("Enter name");
+
+        // Create Buttons
         JButton bookTicketButton = new JButton("Book");
-        JButton printTicketsButton = new JButton("Print Tickets");
+        JButton printTicketsButton = new JButton("Print Bookers");
         JButton clearButton = new JButton("Clear Tickes");
 
         // Add fields to frame
@@ -43,9 +51,10 @@ public class BookTicketsApp {
             public void actionPerformed(ActionEvent e) {
                 // Add a new booker to the queue
                 if (availableTickets == 0) {
-                    System.out.println("There are no more tickets left. Clear Bookers to restock on tickets");
+                    System.out.println("Tickets sold out. There are no more tickets left. Clear Bookers to restock on tickets");
                     return;
                 }
+                // Grab name of the user
                 String name = nameField.getText();
                 // Check that the user entered a name
                 if (name.isEmpty() || name.equals("Enter name")) {
@@ -53,6 +62,7 @@ public class BookTicketsApp {
                     return;
                 }
 
+                // Add name to queue
                 queue.add( name );
                 availableTickets--;   // subtracting 1 from available tickets
                 System.out.println(name + " Successfully booked a " + ticketName + " Ticket!");
@@ -79,7 +89,7 @@ public class BookTicketsApp {
             public void actionPerformed(ActionEvent e) {
                 // Empty the Queue that contains people who have booked a ticket
                 queue.clear();
-                System.out.println("All the bookers have been removed");
+                System.out.println("All the bookers have been removed. Tickets have been restocked on");
                 availableTickets = 5;
             }
         });
